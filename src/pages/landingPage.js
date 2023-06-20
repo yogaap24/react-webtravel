@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
-import button from 'elements/Button'
+import Header from 'parts/header';
 
 export default class landingPage extends Component {
   render() {
     return (
-      <div>
-        
-      </div>
+      <>
+        <Header {...this.props}></Header>
+      </>
     )
   }
 }
