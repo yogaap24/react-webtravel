@@ -1,65 +1,64 @@
-import React from 'react';
-import { render, fireEvent } from '@testing-library/react';
-import InputNumber from './index';
+import React from "react";
+import { render, fireEvent } from "@testing-library/react";
+import { screen } from "@testing-library/react";
+import InputDate from "./index";
 
 class TestInput extends React.Component {
-    state = {
-        value: ''
-    }
+  state = {
+    value: {
+      startDate: new Date(),
+      endDate: new Date(),
+      key: "selection",
+    },
+  };
 
-    handleChange = e => {
-        this.setState({ [e.target.name]: e.target.value })
-    }
+  handleChange = (e) => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
 
-    render() {
-        return (
-            <InputNumber
-                max={30}
-                onChange={this.handleChange}
-                name="value"
-                value={this.state.value}
-            />
-        )
-    }
+  render() {
+    return (
+      <InputDate
+        max={30}
+        onChange={this.handleChange}
+        name="value"
+        value={this.state.value}
+      />
+    );
+  }
 }
 
 const setup = () => {
-    const { container } = render(<TestInput />)
-    const input = container.querySelector(`input.form-control[name='value']`)
+  const { container } = render(<TestInput />);
+  const wrapper = container.querySelector(`.input-date`);
+  const input = container.querySelector(`input.form-control`);
 
-    return {
-        input
-    }
-}
+  return {
+    container,
+    wrapper,
+    input,
+  };
+};
 
-test('Should able to change value', () => {
-    const { input } = setup()
+test("should have wrapper with className .form-control", () => {
+  const { wrapper } = setup();
 
-    fireEvent.change(input, { target: { value: 23 } })
-    console.log(input.value)
-    expect(input.value).toBe('23')
-})
+  expect(wrapper).toBeInTheDocument();
+});
 
-test('Should not be able to change when reach max value', () => {
-    const { input } = setup()
+test("should have tag <input> and has className .form-control", () => {
+  const { input } = setup();
 
-    fireEvent.change(input, { target: { value: 33 } })
-    console.log(input.value)
-    expect(input.value).toBe('')
-})
+  expect(input).toBeInTheDocument();
+  expect(input).toHaveClass("form-control");
+});
 
-test('Should not be able to change when reach min value', () => {
-    const { input } = setup()
+test("should show date picker when click input field", () => {
+  const { container, input } = setup();
 
-    fireEvent.change(input, { target: { value: -1 } })
-    console.log(input.value)
-    expect(input.value).toBe('')
-})
-
-test('Should not be able to change when input not numeric', () => {
-    const { input } = setup()
-
-    fireEvent.change(input, { target: { value: 'test' } })
-    console.log(input.value)
-    expect(input.value).toBe('')
-})
+  // screen.debug();
+  fireEvent.click(input, { button: 1 });
+  const datePickerWrapper = container.querySelector(`.date-range-wrapper`);
+  // screen.debug();
+  expect(datePickerWrapper).toBeInTheDocument();
+});
