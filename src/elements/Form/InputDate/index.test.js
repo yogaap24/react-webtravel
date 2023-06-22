@@ -19,6 +19,7 @@ class TestInput extends React.Component {
   render() {
     return (
       <InputDate
+        minDate={new Date()}
         max={30}
         onChange={this.handleChange}
         name="value"

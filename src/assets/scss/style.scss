@@ -134,7 +134,10 @@ footer {
 }
 
 .card {
-    height: 100%;
+    &.bordered {
+        border: 1px solid $gray-200;
+    }
+    border-radius: 15px;
 
     .tag {
         z-index: 3;
@@ -173,7 +176,6 @@ footer {
         overflow: hidden;
         cursor: pointer;
         height: 100%;       
-        border-radius: 15px;
         &:after {
             position: absolute;
             contain: ""; top: 0; left: 0; right: 0; bottom: 0;
@@ -225,4 +227,11 @@ footer {
     height: 500px;
     width: 365px;
     border-radius: 15px 15px 100px 15px;
+}
+
+main {
+    p {
+        color: $gray-500;
+        font-weight: 300;
+    }
 }

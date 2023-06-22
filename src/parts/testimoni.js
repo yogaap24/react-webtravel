@@ -6,7 +6,7 @@ import Fade from "react-reveal/Fade";
 
 export default function Testimoni({ data }) {
   return (
-    <Fade bottom>
+    <Fade bottom delay={300}>
       <section className="container">
         <div className="row align-items-center">
           <div className="col-auto" style={{ marginRight: 60 }}>

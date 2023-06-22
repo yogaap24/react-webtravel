@@ -1,7 +1,7 @@
 import React  from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import LandingPage from 'pages/landingPage';
-import itemDetails from 'pages/itemDetails';
+import itemDetails from 'pages/pageDetails';
 import example from 'pages/example';
 
 import 'assets/scss/style.scss';
